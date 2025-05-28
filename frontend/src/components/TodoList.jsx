@@ -1,13 +1,13 @@
 import { useState, useEffect } from "react";
 import { io } from "socket.io-client"
-const socket = io("http://localhost:3000");
+const socket = io("https://demotodo-csec.onrender.com");
 const TodoList = () => {
 
     const [l1, setNewl1] = useState("");
     const [taskList, setTaskList] = useState([]);
     useEffect(() => {
         const getList = async () => {
-            let list = await fetch("http://localhost:3000/todos");
+            let list = await fetch("https://demotodo-csec.onrender.com/todos");
             list = await list.json();
             console.log("This is allTasks ", list)
             setTaskList(list);
@@ -27,7 +27,7 @@ const TodoList = () => {
         };
         console.log(newTask);
         try {
-            let res = await fetch("http://localhost:3000/todos", {
+            let res = await fetch("https://demotodo-csec.onrender.com/todos", {
                 method: "POST",
                 headers: {
                     'Content-Type': "application/json"
