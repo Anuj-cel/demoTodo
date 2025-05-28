@@ -1,0 +1,109 @@
+in powershell 
+file creating= ni filename
+folder creating = mkdir foldername
+for running index.js= pnpm start
+npm install -g pnpm
+pnpm init
+pnmp i 
+
+
+during adding atlas link add db name in link if more than one db === 'mongodb+srv://ajkumarmahto001com:RSoQIbKeWOiXKnt7@cluster0.75f9o.mongodb.net/Todo?retryWrites=true&w=majority&appName=Cluster0'
+
+app.use(cors()); // all
+app.use(cors({
+  origin: 'http://example.com', // allow requests from this origin
+  methods: ['GET', 'POST', 'PUT', 'DELETE'], // allow these HTTP methods
+  allowedHeaders: ['Content-Type', 'Authorization'], // allow these headers
+  maxAge: 3600, // cache preflight requests for 1 hour
+}));
+
+app.use(express.json())//form data
+
+
+//sending post request 
+await fetch("http://localhost:3000/todos", {
+                method: "POST",
+                headers: {
+                    'Content-Type': "application/json"
+                },
+                body: JSON.stringify(newTask)
+            });
+
+ <input type="text" name="listItem" onChange={(event) => setNewl1(event.target.value)} />
+
+4. what is headers
+  Headers are key-value pairs that are included in HTTP requests and responses. They provide additional information about the request or response, such as:
+
+    Metadata: Information about the request or response, like the content type, encoding, and caching instructions.
+    Authentication: Credentials or tokens used to authenticate the request.
+    Content negotiation: Information about the format of the request or response body.
+
+5. res.json() and res.send() 
+    When you use .send(), Express.js automatically sets the Content-Type header based on the type of data being sent.
+    For example, if you send a string, the Content-Type header will be set to text/html. If you send an object or array, it will be serialized to JSON and the Content-Type header will be set to application/json.
+
+  Example:
+  JavaScript
+
+  res.send('Hello World'); // sends a string response with Content-Type: text/html
+  res.send({ name: 'John' }); // sends a JSON response with Content-Type: application/json
+
+  res.json({ name: 'John' });
+  When you call res.json(), Express.js:
+
+    Sets the Content-Type header of the response to application/json.
+    Serializes the data you pass to it as JSON.
+    Sends the JSON data in the response body.
+
+  Here's an example:
+  JavaScript
+
+  res.json({ name: 'John', age: 30 });
+
+  This would send a response with the following characteristics:
+
+      Content-Type header: application/json
+      Response body: {"name":"John","age":30}
+6. what does a  data=await res.json(); this returns a promise which when resolved gives js object out of JSON
+
+7. use Model.find() not .find({}) in vs code
+
+8. Socket for react
+    import {io}from "socket.io-client"
+    const socket=io("http://localhost:3000");
+    export default socket;
+
+9. socket.off("task") ,name of the listener
+    setTask(prev=>[...prev,newTask]);
+
+10. io needs its own cors
+    const io = new Server(server, {
+    cors: {
+      origin: "http://localhost:5173", // ✅ change to match your React dev server
+      methods: ["GET", "POST"]
+    }
+  });
+
+11. i was making error by  adding origin: "http://localhost:5173", as "5173/"
+
+12.why socket should be written in useEffect
+    This prevents multiple redundant listeners from being added each time the component re-renders.
+
+  If you put socket.on(...) outside of useEffect, like this:
+
+  socket.on("task", (newTask) => {
+    setTaskList(prev => [...prev, newTask]);
+  });
+
+    It will run on every render, and add a new listener every time , which leads to:
+
+    Duplicate updates
+
+    Memory leaks
+
+    Performance issues
+
+    Unexpected behavior like tasks being added multiple times
+
+13.Does useEffect runs everyTime socket runs  
+  No,Socket events (like socket.on("task", ...)) keep listening passively in the background — they don't cause the useEffect to rerun.
